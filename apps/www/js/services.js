@@ -1,4 +1,8 @@
-angular.module('starter.services', [])
+angular.module('starter.services', ['ionic', 'ngResource'])
+
+.factory('Stop', function($resource) {
+  return $resource('http://localhost:3333/stops.json/:id');
+})
 
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array

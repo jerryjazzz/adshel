@@ -1,9 +1,7 @@
 namespace :at do
   desc "Sync Auckland transport stops"
   task :sync_stops => :environment do
-    conn = Faraday.new(:url => 'https://api.at.govt.nz')
-    response = conn.get '/v1/gtfs/stops?api_key=615c28df-5d93-4ced-81b5-c620e45e40af'
-    response = JSON.parse(response.body)
+    response = AucklandTransportApi.stops
 
     if response["status"] == "OK"
       response["response"].each do |stop|

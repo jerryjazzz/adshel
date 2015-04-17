@@ -1,25 +1,38 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {
-  var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
-
+.controller('DashCtrl', function($scope, Stop) {
+  var myLatlng = new google.maps.LatLng(-36.848199, 174.754490);
   var mapOptions = {
       center: myLatlng,
-      zoom: 16,
+      zoom: 17,
+      minZoom: 17,
       mapTypeId: google.maps.MapTypeId.ROADMAP
   };
-
   var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  var infoWindow = new google.maps.InfoWindow();
 
-  navigator.geolocation.getCurrentPosition(function(pos) {
-      map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-      var myLocation = new google.maps.Marker({
-          position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+  Stop.query(function(stops){
+    for( i = 0; i < stops.length; i++ ) {
+      var stop = stops[i];
+      var position = new google.maps.LatLng(stop['stop_lat'], stop['stop_lon']);
+      var marker = new google.maps.Marker({
+          position: position,
           map: map,
-          title: "My Location"
+          title: stop['stop_name']
       });
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infoWindow.setContent(stops[i]['stop_name']);
+          infoWindow.open(map, marker);
+        }
+      })(marker, i));
+    }
   });
 
+  // To use current location as map midpoint
+  // navigator.geolocation.getCurrentPosition(function(pos) {
+  //     map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+  // });
   $scope.map = map;
 })
 
