@@ -1,7 +1,27 @@
 class AucklandTransportApi
 
+  def self.stop_times(stop_id)
+    request("stopTimes/stopId/#{stop_id}")
+  end
+
   def self.stops
     request('stops')
+  end
+
+  def self.create_or_update(response, model, id_name)
+    if response["status"] == "OK"
+      response["response"].each do |instance|
+        existing = model.find_by(id_name => instance[id_name])
+        if existing.present?
+          existing.update_attributes(instance)
+        else
+          model.create(instance)
+        end
+      end
+      puts "#{response["response"].count} #{model.class.name.downcase} updated."
+    else
+      raise "Stops API returned: #{response["error"]}"
+    end
   end
 
   protected

@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416131446) do
+ActiveRecord::Schema.define(version: 20150417072747) do
+
+  create_table "stop_times", force: :cascade do |t|
+    t.string   "trip_id"
+    t.string   "arrival_time"
+    t.string   "departure_time"
+    t.string   "stop_id"
+    t.string   "stop_sequence"
+    t.string   "stop_headsign"
+    t.string   "pickup_type"
+    t.string   "drop_off_type"
+    t.string   "shape_dist_traveled"
+    t.string   "timepoint"
+    t.string   "arrival_time_seconds"
+    t.string   "departure_time_seconds"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "stops", force: :cascade do |t|
     t.string   "stop_id"
