@@ -4,6 +4,10 @@ angular.module('starter.services', ['ionic', 'ngResource'])
   return $resource('http://localhost:3333/stops.json/:id');
 })
 
+.factory('StopTime', function($resource) {
+  return $resource('http://localhost:3333/stops/:stopId/stop_times.json/:id');
+})
+
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 

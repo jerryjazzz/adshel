@@ -22,7 +22,10 @@ angular.module('starter.controllers', [])
       });
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
-          infoWindow.setContent(stops[i]['stop_name']);
+          infoWindow.setContent(
+            '<h3>'+stops[i]['stop_name']+'</h3>'+
+            '<a class="button button-block button-stable" href="#/tab/dash/'+stops[i]['stop_id']+'">View Stop Times</a>'
+            );
           infoWindow.open(map, marker);
         }
       })(marker, i));
@@ -35,6 +38,11 @@ angular.module('starter.controllers', [])
   // });
   $scope.map = map;
 })
+
+.controller('DashDetailCtrl', function($scope, $stateParams, StopTime) {
+  $scope.stopTimes = StopTime.query({stopId: $stateParams.stopId});
+})
+
 
 .controller('ChatsCtrl', function($scope, Chats) {
   $scope.chats = Chats.all();

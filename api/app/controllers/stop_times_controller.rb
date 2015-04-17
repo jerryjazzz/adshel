@@ -7,7 +7,7 @@ class StopTimesController < ApplicationController
         AucklandTransportApi.create_or_update(response, StopTime, :arrival_time)
       end
 
-      page.json { render json: StopTime.where(stop_id: params[:stop_id]).order(:arrival_time).all }
+      page.json { render json: StopTime.where(stop_id: params[:stop_id]).order(:arrival_time) }      
     end
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150417072747) do
+ActiveRecord::Schema.define(version: 20150417082301) do
 
   create_table "stop_times", force: :cascade do |t|
     t.string   "trip_id"
@@ -53,6 +53,20 @@ ActiveRecord::Schema.define(version: 20150417072747) do
     t.string   "the_geom"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+  end
+
+  create_table "trips", force: :cascade do |t|
+    t.string   "route_id"
+    t.string   "service_id"
+    t.string   "trip_id"
+    t.string   "trip_headsign"
+    t.string   "direction_id"
+    t.string   "block_id"
+    t.string   "shape_id"
+    t.string   "trip_short_name"
+    t.string   "trip_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end

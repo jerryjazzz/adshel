@@ -9,4 +9,10 @@ namespace :at do
   task :sync_stop_times => :environment do
     #TODO: Find out a way to slowly update stop times over a month to reduce requests
   end
+
+  desc "Sync Auckland transport trips"
+  task :sync_trips => :environment do
+    response = AucklandTransportApi.trips
+    AucklandTransportApi.create_or_update(response, Trip, :trip_id)
+  end
 end

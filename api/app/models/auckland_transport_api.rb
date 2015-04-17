@@ -8,10 +8,14 @@ class AucklandTransportApi
     request('stops')
   end
 
+  def self.trips
+    request('trips')
+  end
+
   def self.create_or_update(response, model, id_name)
     if response["status"] == "OK"
       response["response"].each do |instance|
-        existing = model.find_by(id_name => instance[id_name])
+        existing = model.find_by(id_name => instance[id_name.to_s])
         if existing.present?
           existing.update_attributes(instance)
         else

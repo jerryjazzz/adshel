@@ -1,0 +1,13 @@
+<ion-view view-title="Stop Times">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-icon-left item-icon-right" ng-repeat="stopTime in stopTimes" type="item-text-wrap">
+        <i>{{stopTime.arrival_time}}</i>
+        <strong>{{stopTime.trip_headsign}}</strong>
+        <span class="button button-small button-stable item-note">
+          Remind me
+        </span>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
