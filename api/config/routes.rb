@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :stops, only: [:index] do
-    resources :stop_times, only: [:index]
-  end
+  resources :routes, only: [:index]
+  resources :stops, only: [:index]
+  resources :stop_times, only: [:index]
+  resources :trips, only: [:index]
 
 
   # The priority is based upon order of creation: first created -> highest priority.

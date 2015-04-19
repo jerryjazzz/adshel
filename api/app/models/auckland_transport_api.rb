@@ -1,7 +1,11 @@
 class AucklandTransportApi
 
-  def self.stop_times(stop_id)
+  def self.stop_times_by_stop(stop_id)
     request("stopTimes/stopId/#{stop_id}")
+  end
+
+  def self.stop_times_by_trip(trip_id)
+    request("stopTimes/tripId/#{trip_id}")
   end
 
   def self.stops
@@ -10,6 +14,10 @@ class AucklandTransportApi
 
   def self.trips
     request('trips')
+  end
+
+  def self.routes
+    request('routes')
   end
 
   def self.create_or_update(response, model, id_name)

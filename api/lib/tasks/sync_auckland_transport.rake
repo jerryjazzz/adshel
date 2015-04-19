@@ -15,4 +15,17 @@ namespace :at do
     response = AucklandTransportApi.trips
     AucklandTransportApi.create_or_update(response, Trip, :trip_id)
   end
+
+  desc "Sync Auckland transport routes"
+  task :sync_routes => :environment do
+    response = AucklandTransportApi.routes
+    AucklandTransportApi.create_or_update(response, Route, :route_id)
+  end
+
+  desc "Sync Auckland transport routes"
+  task :sync_everything => :environment do
+    %x[rake at:sync_stops]
+    %x[rake at:sync_trips]
+    %x[rake at:sync_routes]
+  end
 end

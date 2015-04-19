@@ -1,11 +1,19 @@
 angular.module('starter.services', ['ionic', 'ngResource'])
 
+.factory('Trip', function($resource) {
+  return $resource('http://localhost:3333/trips.json/:id');
+})
+
+.factory('Route', function($resource) {
+  return $resource('http://localhost:3333/routes.json/:id');
+})
+
 .factory('Stop', function($resource) {
   return $resource('http://localhost:3333/stops.json/:id');
 })
 
 .factory('StopTime', function($resource) {
-  return $resource('http://localhost:3333/stops/:stopId/stop_times.json/:id');
+  return $resource('http://localhost:3333/stop_times.json/:id');
 })
 
 .factory('Chats', function() {

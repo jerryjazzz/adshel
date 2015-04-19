@@ -6,5 +6,4 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-%x[rake at:sync_stops]
-%x[rake at:sync_trips]
+%x[rake at:sync_everything]

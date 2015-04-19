@@ -40,19 +40,33 @@ angular.module('starter.controllers', [])
 })
 
 .controller('DashDetailCtrl', function($scope, $stateParams, StopTime) {
-  $scope.stopTimes = StopTime.query({stopId: $stateParams.stopId});
+  $scope.stopTimes = StopTime.query({stop_id: $stateParams.stopId});
 })
 
 
-.controller('ChatsCtrl', function($scope, Chats) {
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
+.controller('ChatsCtrl', function($scope, Route) {
+  $scope.routes = [];
+  $scope.query = '';
+  // $scope.remove = function(chat) {
+  //   Chats.remove(chat);
+  // }
+  $scope.search = function() {
+    if ( this.query.length < 3 ) {
+      $scope.routes = [];
+    } else {
+      Route.query({ q: this.query }, function(routes) {
+        $scope.routes = routes;
+      });
+    }
   }
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+.controller('ChatDetailCtrl', function($scope, $stateParams, Trip) {
+  $scope.trips = Trip.query({ route_id: $stateParams.routeId });
+})
+
+.controller('TripDetailCtrl', function($scope, $stateParams, StopTime) {
+  $scope.stop_times = StopTime.query({ trip_id: $stateParams.tripId });
 })
 
 .controller('AccountCtrl', function($scope) {
@@ -60,3 +74,23 @@ angular.module('starter.controllers', [])
     enableFriends: true
   };
 });
+
+
+//TETETETTE
+
+// .controller('MyCtrl', ['$scope', 'FlightDataService', function($scope, FlightDataService) {
+//
+// 	$scope.myTitle = 'Auto Complete Example';
+//
+//   $scope.data = { "airlines" : [], "search" : '' };
+//
+//   $scope.search = function() {
+//
+//   	FlightDataService.searchAirlines($scope.data.search).then(
+//   		function(matches) {
+//   			$scope.data.airlines = matches;
+//   		}
+//   	)
+//   }
+//
+// }]);
