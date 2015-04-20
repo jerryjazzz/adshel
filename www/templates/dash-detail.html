@@ -1,9 +1,12 @@
 <ion-view view-title="Stop Times">
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-icon-left item-icon-right" ng-repeat="stopTime in stopTimes" type="item-text-wrap" href="#/tab/dash/trips/{{stopTime.trip_id}}">
+      <ion-item class="item-remove-animate item-icon-left item-icon-right" ng-if="stopTime.minutesToArrival() >= 0" ng-repeat="stopTime in stopTimes" type="item-text-wrap" href="#/tab/dash/trips/{{stopTime.trip_id}}">
         <i>{{stopTime.arrival_time}}</i>
         <strong>{{stopTime.trip_headsign}}</strong>
+        <p>
+          Bus arrives in {{stopTime.minutesToArrival()}} minutes
+        </p>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </ion-list>

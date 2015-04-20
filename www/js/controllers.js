@@ -40,7 +40,12 @@ angular.module('starter.controllers', [])
 })
 
 .controller('DashDetailCtrl', function($scope, $stateParams, StopTime) {
-  $scope.stopTimes = StopTime.query({stop_id: $stateParams.stopId});
+  var stopTimes = StopTime.query({stop_id: $stateParams.stopId});
+  $scope.stopTimes = stopTimes;
+
+  setInterval(function(){
+    $scope.$apply();
+  }, 60000);
 })
 
 

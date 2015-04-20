@@ -13,7 +13,21 @@ angular.module('starter.services', ['ionic', 'ngResource'])
 })
 
 .factory('StopTime', function($resource) {
-  return $resource('http://localhost:3333/stop_times.json/:id');
+  var StopTime = $resource('http://localhost:3333/stop_times.json/:id');
+  StopTime.prototype.minutesToArrival = function() {
+
+    var arrival_hour = this.arrival_time.split(':')[0];
+    var arrival_minutes = this.arrival_time.split(':')[1];
+
+    var arrivalDate = new Date(0, 0, 0, arrival_hour, arrival_minutes);
+    var currentDate = new Date(0, 0, 0, new Date().getHours(), new Date().getMinutes());
+
+    var millis = arrivalDate - currentDate;
+    var minutes = millis/1000/60;
+
+    return minutes;
+  };
+  return StopTime;
 })
 
 .factory('Chats', function() {
