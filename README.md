@@ -18,8 +18,7 @@ And to run the project run:
 
 ##Pull request Todo list
 All changes must be submitted as pull requests and the folling checklist completed:
-* Passes rubucop
-* Passes jslint
+* Doesn't break Code Climate
 * Passes CI tests
 * Change doesn't break setup/run_project.sh
 * Doesn't introduce security hole.

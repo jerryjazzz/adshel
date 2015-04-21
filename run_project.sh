@@ -1,4 +1,3 @@
-#!/bin/bash
 echo "Runing Adshel project now."
 
 function new_tab() {
